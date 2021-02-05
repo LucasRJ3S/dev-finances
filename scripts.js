@@ -1,13 +1,20 @@
-const handler = document.querySelector('#switch');
+const Modal = {
+  open() {
+    //Abrir modal
+   
+    //Adicionar a class active ao model
+    document
+      .querySelector('.modal-overlay')
+      .classList
+      .add('active')
 
-function changeTheme() {
-  if (handler.checked) (
-    document.documentElement.setAttribute('color-scheme', 'dark')
-  )
-  else
-    (
-    document.documentElement.setAttribute('color-scheme', 'light')
-  )
+  },
+  close() {
+    //fechar o modal
+    //remover a class active do modal
+    document
+      .querySelector('.modal-overlay')
+      .classList
+      .remove('active')
+  }
 }
-
-handler.addEventListener('change', function () { changeTheme() });

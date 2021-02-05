@@ -1,141 +1,308 @@
-/* Universal Selector - Global*/
-:root{
-     --dark-blue: #405a6a ;
-     --color-white: white;
+/* Universal Selector - Global ---------------------------------------*/
+
+:root {
+  --dark-blue: #405a6a;
+  --color-white: white;
+  --green: #49aa26;
+  --light-green: #3dd705;
+  --red: #e92929;
 }
 
 * {
-     margin: 0;
-     padding: 0;
-     box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 93.75%; /* 15px , 93,75% de 16px */
 }
 
 body {
-     background: #f0f2f5;
-     font-family: "Poppins", sans-serif;
+  background: #f0f2f5;
+  font-family: "Poppins", sans-serif;
 }
 
-.container{
-     width: min(90vw, 800px);
-     margin: auto;
+/*está mantendo os titulos de transações e balanço visivel para os leitores de tela para as pessoas deficientes */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
-/* Titles */
-
-h2{
-     margin-top: 3.2rem;
-     margin-bottom: 0.8rem;
-     color: var(--dark-blue);
-
-     font-weight: normal;
+.container {
+  width: min(90vw, 800px);
+  margin: auto;
 }
 
-/*Theme Toggle*/
+/* Titles ---------------------------------------*/
 
-/* Header */
+h2 {
+  margin-top: 3.2rem;
+  margin-bottom: 0.8rem;
+  color: var(--dark-blue);
+  font-weight: normal;
+}
+
+/*Links & Buttons ---------------------------------------*/
+
+a {
+  color: var(--green);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--light-green);
+}
+
+button {
+  width: 100%;
+  height: 50px;
+
+  border: none;
+
+  color: white;
+  background: var(--green);
+
+  padding: 0;
+
+  border-radius: 0.25rem;
+
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--light-green);
+}
+
+/*aqui queremos que a caixa tenha button e new para alterar os dois*/
+.button.new {
+  display: inline-block;
+  margin-bottom: 0.8rem;
+}
+
+.button.cancel {
+  color: var(--red);
+  border: 2px var(--red) solid;
+  border-radius: 0.25rem;
+
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0.6;
+}
+
+.button.cancel:hover {
+  opacity: 1;
+}
+
+/* Header ---------------------------------------*/
 
 header {
-     background-color: #2d4a22;
-     padding: 2rem 0 10rem;
-     text-align: center;
+  background-color: #2d4a22;
+  padding: 2rem 0 10rem;
+  text-align: center;
 }
 
 header h1 {
-     color: var(--color-white);
-     font-weight: 100;
+  color: var(--color-white);
+  font-weight: 100;
 }
 
-/* Balance */
+/* Balance ---------------------------------------*/
 
-#balance{
-     margin-top: -8rem;
+#balance {
+  margin-top: -8rem;
 }
 
-#balance h2{
-     color: var(--color-white);
-     margin-top: 0;
-}
-/* Cards */
-.card{
-    background: white;
-    padding: 1.5rem 2rem;
-    border-radius: 0.25rem;
-
-    margin-bottom: 2rem;
-
-    color: var(--dark-blue);
-
+#balance h2 {
+  color: var(--color-white);
+  margin-top: 0;
 }
 
-.card h3{
-     font-weight: normal;
-     font-size: 1rem;
+/* Cards ---------------------------------------*/
+
+.card {
+  background: white;
+  padding: 1.5rem 2rem;
+  border-radius: 0.25rem;
+  margin-bottom: 2rem;
+  color: var(--dark-blue);
 }
 
-.card p{
-     font-size: 2rem;
-     line-height: 3rem;
-
-     margin-top: 1rem;
+.card h3 {
+  font-weight: normal;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  /*para  centralizar a imagem com o texto */
+  justify-content: space-between;
+  /*espaço entre o texto da caixa h3 e a imagem */
 }
 
-.card.total{
-     background: #49AA26;
-     color: var(--color-white);
+.card p {
+  font-size: 2rem;
+  line-height: 3rem;
+  margin-top: 1rem;
 }
 
-/* Table */
-#data-table{
-     width: 100%; /* pegando 100% da caixa em que a data-table está, que no caso está dentro de #transaction */
-     border-spacing: 0 0.5rem; /* 0 espaço entre as colunas verticais, e 0.5rem espaço entre as linhas horizontais */
-     color: #969cb3;
+.card.total {
+  background: var(--green);
+  color: var(--color-white);
+}
+
+/* Table ---------------------------------------*/
+
+#transaction {
+  display: block;
+  width: 100%;
+  overflow-x: auto; /*para não transbordar a tela no mobile*/
+}
+
+#data-table {
+  width: 100%;
+  border-spacing: 0 0.5rem;
+  color: #969cb3;
 }
 
 table thead tr th:first-child,
-table tbody tr td:first-child{    
-     border-radius: 0.25rem 0 0 0.25rem
+table tbody tr td:first-child {
+  border-radius: 0.25rem 0 0 0.25rem;
 }
 
-table thead th{
-     background: var(--color-white);
-     
-     font-weight: normal;
-     padding: 1rem 2rem;
-
-     text-align: left;
-     
+table thead tr th:last-child,
+table tbody tr td:last-child {
+  border-radius: 0 0.25rem 0.25rem 0;
 }
 
-table tbody tr{
-     opacity: 0.7;
+table thead th {
+  background: var(--color-white);
+  font-weight: normal;
+  padding: 1rem 2rem;
+  text-align: left;
 }
 
-table tbody tr:hover{
-     opacity: 1;
+table tbody tr {
+  opacity: 0.7;
 }
 
-table tbody td{
-     background: var(--color-white);
-     padding: 1rem 2rem;
+table tbody tr:hover {
+  opacity: 1;
 }
 
-td.description{
-     color: var(--dark-blue)
+table tbody td {
+  background: var(--color-white);
+  padding: 1rem 2rem;
 }
 
-td.income{
-     color: green;
+td.description {
+  color: var(--dark-blue);
 }
 
-td.expense{
-     color: red;
+td.income {
+  color: green;
 }
-/* Footer */
 
-footer{
-     text-align: center;
-     padding: 4rem 0 2rem;
-     color: var(--dark-blue);
+td.expense {
+  color: red;
+}
+/* Modal ---------------------------------------*/
+.modal-overlay {
+  width: 100%;
+  height: 100%;
 
-     opacity: 0.6;
+  background-color: rgba(0, 0, 0, 0.7);
+
+  position: fixed;
+  top: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0.7;
+  visibility: hidden;
+  z-index: 999;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal {
+  background: #f0f2f5;
+  padding: 2.4rem;
+
+  position: relative;
+  z-index: 1;
+}
+/* Form - Modal ---------------------------------------*/
+#form {
+  max-width: 500px;
+}
+
+#form h2 {
+  margin-top: 0;
+}
+
+input {
+  border: none;
+  border-radius: 0.2rem;
+
+  padding: 0.8rem;
+
+  width: 100%;
+}
+
+.input-group {
+  margin-top: 0.8rem;
+}
+
+.input-group small {
+  opacity: 0.7;
+}
+
+.input-group.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.input-group.actions .button,
+.input-group.actions button {
+  width: 48%;
+}
+
+/* Footer ---------------------------------------*/
+
+footer {
+  text-align: center;
+  padding: 4rem 0 2rem;
+  color: var(--dark-blue);
+  opacity: 0.6;
+}
+
+/* Reponsive ---------------------------------------*/
+/*a partir de 800px pra cima faça essa alteração abaixo*/
+@media (min-width: 800px) {
+  html {
+    font-size: 87.5%; /* 14px de 16px qnt de px de fonte tem aqui? */
+  }
+
+  #balance {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 1fr 1fr 1fr*/
+    gap: 2rem; /*espaço entre as colunas do grid*/
+  }
 }
