@@ -18,3 +18,10 @@ const Modal = {
       .remove('active')
   }
 }
+
+//Change Theme
+
+function changeTheme() {
+  const element = document.body
+  element.classList.toggle("dark-mode")
+}

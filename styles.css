@@ -19,10 +19,87 @@ html {
 }
 
 body {
-  background: #f0f2f5;
+  background-color: rgb(218, 218, 218);
+  color: black;
   font-family: "Poppins", sans-serif;
+  transition: 0.8s;
+}
+/* Header ---------------------------------------*/
+
+header {
+  background-color: #2d4a22;
+  padding: 2rem 0 10rem;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
 }
 
+header h1 {
+  color: var(--color-white);
+  font-weight: 100;
+}
+/* Switch theme ---------------------------------------*/
+
+.switch {
+  position: relative;
+  width: 60px;
+  height: 28px;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  -webkit-transition: 0.8s;
+  transition: 0.4s;
+  border: 2px solid black;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 2.5px;
+  background: black;
+  -webkit-transition: 0.8s;
+  transition: 0.8s;
+}
+
+input:checked + .slider {
+  background-color: #558751;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #3677a9;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.dark-mode {
+  background: black;
+  color: white;
+
+  transition: 0.8s;
+}
 /*está mantendo os titulos de transações e balanço visivel para os leitores de tela para as pessoas deficientes */
 
 .sr-only {
@@ -106,19 +183,6 @@ button:hover {
   opacity: 1;
 }
 
-/* Header ---------------------------------------*/
-
-header {
-  background-color: #2d4a22;
-  padding: 2rem 0 10rem;
-  text-align: center;
-}
-
-header h1 {
-  color: var(--color-white);
-  font-weight: 100;
-}
-
 /* Balance ---------------------------------------*/
 
 #balance {
@@ -172,7 +236,7 @@ header h1 {
 #data-table {
   width: 100%;
   border-spacing: 0 0.5rem;
-  color: #969cb3;
+  color: black;
 }
 
 table thead tr th:first-child,
@@ -193,7 +257,7 @@ table thead th {
 }
 
 table tbody tr {
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 table tbody tr:hover {
@@ -201,12 +265,12 @@ table tbody tr:hover {
 }
 
 table tbody td {
-  background: var(--color-white);
+  background: rgb(201, 200, 200);
   padding: 1rem 2rem;
 }
 
 td.description {
-  color: var(--dark-blue);
+  color: black;
 }
 
 td.income {
@@ -289,8 +353,8 @@ input {
 footer {
   text-align: center;
   padding: 4rem 0 2rem;
-  color: var(--dark-blue);
-  opacity: 0.6;
+  color: var(--light-green);
+  opacity: 0.8;
 }
 
 /* Reponsive ---------------------------------------*/
