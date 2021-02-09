@@ -333,7 +333,7 @@ input {
   margin-top: 0.8rem;
 }
 
-.input-group small {
+.input-group .help {
   opacity: 0.7;
 }
 
@@ -353,7 +353,7 @@ input {
 footer {
   text-align: center;
   padding: 4rem 0 2rem;
-  color: var(--light-green);
+  color: var(--green);
   opacity: 0.8;
 }
 
