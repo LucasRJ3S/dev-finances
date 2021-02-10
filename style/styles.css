@@ -1,11 +1,17 @@
 /* Universal Selector - Global ---------------------------------------*/
 
 :root {
-  --dark-blue: #405a6a;
+  --dark-blue: #000000;
   --color-white: white;
-  --green: #49aa26;
+  --green: #54ba30;
   --light-green: #3dd705;
   --red: #e92929;
+
+  /* inital colors to dark theme */
+  --bg: #FCFCFC;
+  --bg-panel: #d3d3d3;
+  --color-headings: #566d4d;
+  --color-text: #000000;
 }
 
 * {
@@ -19,19 +25,20 @@ html {
 }
 
 body {
-  background-color: rgb(218, 218, 218);
-  color: black;
+  background-color: var(--bg);
+  color: var(--color-text);
   font-family: "Poppins", sans-serif;
-  transition: 0.8s;
+  transition: 0.6s;
+
 }
 /* Header ---------------------------------------*/
 
 header {
-  background-color: #2d4a22;
+  background-color: var(--color-headings);
   padding: 2rem 0 10rem;
   text-align: center;
-  display: flex;
-  justify-content: space-around;
+  
+  justify-content: center;
 }
 
 header h1 {
@@ -40,66 +47,59 @@ header h1 {
 }
 /* Switch theme ---------------------------------------*/
 
-.switch {
+.containerSwitchTheme{ 
   position: relative;
-  width: 60px;
-  height: 28px;
+  
+}
+.toggle{
+  position: absolute;
+  bottom: 2px;
+  right: 16px;
 }
 
-.slider {
-  position: absolute;
+input[type=checkbox]{
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+.labelSwitch{
   cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: white;
-  -webkit-transition: 0.8s;
-  transition: 0.4s;
-  border: 2px solid black;
+  text-indent: -9999px;
+  width: 52px;
+  height: 27px;
+  background: var(--bg);
+  float: right;
+  border-radius: 100px;
+  position: relative;
 }
 
-.slider:before {
-  position: absolute;
+.labelSwitch::after{
   content: "";
-  height: 20px;
+  position: absolute;
+  top: 3px;
+  left: 3px;
   width: 20px;
-  left: 4px;
-  bottom: 2.5px;
-  background: black;
-  -webkit-transition: 0.8s;
-  transition: 0.8s;
+  height: 20px;
+  background-color: black;
+  border-radius: 50px;
+  transition: 0.6s;
 }
 
-input:checked + .slider {
-  background-color: #558751;
+input:checked + .labelSwitch{
+  background-color: black;
 }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #3677a9;
+input:checked + .labelSwitch::after{
+  background-color: white;
+  left: calc(100% - 5px);
+  transform: translateX(-100%);
 }
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+.labelSwitch:active:after{
+  width: 45px;
 }
 
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-
-.dark-mode {
-  background: black;
-  color: white;
-
-  transition: 0.8s;
-}
 /*está mantendo os titulos de transações e balanço visivel para os leitores de tela para as pessoas deficientes */
 
 .sr-only {
@@ -124,19 +124,20 @@ input:checked + .slider:before {
 h2 {
   margin-top: 3.2rem;
   margin-bottom: 0.8rem;
-  color: var(--dark-blue);
+  color: var(--color-text);
   font-weight: normal;
 }
 
 /*Links & Buttons ---------------------------------------*/
 
 a {
-  color: var(--green);
+  
+  color: var(--color-text);
   text-decoration: none;
 }
 
 a:hover {
-  color: var(--light-green);
+  
 }
 
 button {
@@ -197,11 +198,12 @@ button:hover {
 /* Cards ---------------------------------------*/
 
 .card {
-  background: white;
+  background: var(--bg);
+  border: 1px solid var(--color-text);
   padding: 1.5rem 2rem;
   border-radius: 0.25rem;
   margin-bottom: 2rem;
-  color: var(--dark-blue);
+  color: var(--color-text);
 }
 
 .card h3 {
@@ -214,6 +216,11 @@ button:hover {
   /*espaço entre o texto da caixa h3 e a imagem */
 }
 
+.card h3:hover {
+  
+  opacity: 0.7;
+}
+
 .card p {
   font-size: 2rem;
   line-height: 3rem;
@@ -222,7 +229,7 @@ button:hover {
 
 .card.total {
   background: var(--green);
-  color: var(--color-white);
+  color: var(--color-text);
 }
 
 /* Table ---------------------------------------*/
@@ -237,40 +244,72 @@ button:hover {
   width: 100%;
   border-spacing: 0 0.5rem;
   color: black;
+ 
 }
 
 table thead tr th:first-child,
 table tbody tr td:first-child {
-  border-radius: 0.25rem 0 0 0.25rem;
+  
+  border-radius: 0.30rem 0 0 0.30rem;
 }
 
 table thead tr th:last-child,
 table tbody tr td:last-child {
-  border-radius: 0 0.25rem 0.25rem 0;
+  border-radius: 0 0.30rem 0.30rem 0;
+  
 }
 
 table thead th {
-  background: var(--color-white);
-  font-weight: normal;
+  
+  background: var(--green);
+  border-bottom: 0.5px solid var(--color-text);
+  border-top: 0.5px solid var(--color-text);
+  border-bottom: 0.5px solid var(--color-text);
+  color: var(--color-text);
+  font-weight: 400;
   padding: 1rem 2rem;
   text-align: left;
 }
-
-table tbody tr {
-  opacity: 0.8;
+table thead th:last-child {
+  border-right: 0.5px solid var(--color-text);
+}
+table tbody td:last-child {
+  border-right: 0.5px solid var(--color-text);
+}
+table thead th:first-child {
+  border-left: 0.5px solid var(--color-text);
+}
+table tbody td:first-child {
+  border-left: 0.5px solid var(--color-text);
 }
 
-table tbody tr:hover {
+table tbody tr{
+  background: var(--bg-panel);
+}
+
+table tbody tr {
   opacity: 1;
 }
 
+table tbody tr:hover {
+  
+  opacity: 0.7;
+}
+
 table tbody td {
-  background: rgb(201, 200, 200);
+  background: var(--bg-panel);
+  color: var(--color-text);
   padding: 1rem 2rem;
+
+  border-bottom: 0.5px solid var(--color-text);
+  border-top: 0.5px solid var(--color-text);
+  border-bottom: 0.5px solid var(--color-text);
+
+ 
 }
 
 td.description {
-  color: black;
+  color:  var(--color-text);
 }
 
 td.income {
@@ -294,7 +333,7 @@ td.expense {
   align-items: center;
   justify-content: center;
 
-  opacity: 0.7;
+  opacity: 0.5;
   visibility: hidden;
   z-index: 999;
 }
@@ -305,7 +344,8 @@ td.expense {
 }
 
 .modal {
-  background: #f0f2f5;
+  background: var(--bg);
+  color: var(--color-text);
   padding: 2.4rem;
 
   position: relative;
@@ -353,7 +393,7 @@ input {
 footer {
   text-align: center;
   padding: 4rem 0 2rem;
-  color: var(--green);
+  color: var(--color-text);
   opacity: 0.8;
 }
 
@@ -370,3 +410,4 @@ footer {
     gap: 2rem; /*espaço entre as colunas do grid*/
   }
 }
+
