@@ -1,275 +1,267 @@
-//No javascript precisamos organizar nossas ideias do que fazer primeiro, e comenta-las por exemplo para depois tentar passar isso para o codigo, estamos praticamente traduzindo nossas ideias para o codigo
-
-//Abrir e fechar o Modal - Se der tente fazer uma função só toogle
+/* Open and Close Modal */
 const Modal = {
-   open() {
-      //Abrir modal
+  open(transactionId = "") {
+    const form = document.querySelector(".modal-overlay");
+    form.classList.add("active");
 
-      //Adicionar a class active ao model
-      document.querySelector(".modal-overlay").classList.add("active");
-   },
-   close() {
-      //fechar o modal
-      //remover a class active do modal
-      document.querySelector(".modal-overlay").classList.remove("active");
-   },
+    if (transactionId) {
+      transactionId = Number(transactionId);
+      const [transaction] = Transaction.all.filter((transaction) => {
+        return transaction.id == transactionId;
+      });
+      Form.setValues(
+        transaction.description,
+        transaction.amount / 100,
+        Utils.formatStringDateToDate(transaction.date),
+        transaction.id
+      );
+    }
+  },
+  close() {
+    const form = document.querySelector(".modal-overlay");
+    form.classList.remove("active");
+  },
 };
 
-//guardar as informações no localStorage do navegador, pra quando atualizar os dados não serem perdidos , lembrar de guardar a troca de tema também
-const Storage = {
-   get() {
-      //parse vai transformar de string para objeto ou array
-      return JSON.parse(localStorage.getItem("dev.finances:transactions")) || [];
-   },
-   set(transactions) {
-      //primeiro propiedade é nome que vc quer da chave, e o segundo é o valor que vc quer guardar no local storage, os valores no local storage é guardado como string, precisamos transformar um array para string.
-      localStorage.setItem("dev.finances:transactions", JSON.stringify(transactions));
-   },
+/* Storage data in LocalStorage */
+const StorageTransactions = {
+  storageKey: "dev.finances:transactions",
+  get() {
+    return JSON.parse(localStorage.getItem(StorageTransactions.storageKey)) || [];
+  },
+  set(transactions) {
+    localStorage.setItem(StorageTransactions.storageKey, JSON.stringify(transactions));
+  },
 };
 
-//Eu preciso somar as entradas e depois eu preciso somar as saidas e remover das entradas o valor das saidas assim, eu terei o total dos dois
+/* Global values */
 
 const Transaction = {
-   all: Storage.get(),
+  all: StorageTransactions.get(),
 
-   //adicionar transações
-   add(transaction) {
+  //adicionar transações
+  add(transaction) {
+    const index = Transaction.all.findIndex((item, index) => {
+      return item.id == transaction.id;
+    });
+    if (index > -1) {
+      Transaction.all.splice(index, 1, transaction);
+    } else {
       Transaction.all.push(transaction);
+    }
+    App.reload();
+  },
+  //removendo transações
+  remove(transactionId) {
+    const index = Transaction.all.findIndex((transaction, index) => {
+      return transaction.id == transactionId;
+    });
 
-      App.reload();
-   },
-   //removendo transações
-   remove(index) {
-      Transaction.all.splice(index, 1);
+    Transaction.all.splice(index, 1);
+    App.reload();
+  },
+  //pegar entradas
+  incomes() {
+    let income = 0;
 
-      App.reload();
-   },
+    Transaction.all.forEach((transaction) => {
+      if (transaction.amount > 0) {
+        income += transaction.amount;
+      }
+    });
 
-   incomes() {
-      let income = 0;
-      //pegar todas as transacoes
-      //para cada transacao
-      Transaction.all.forEach((transaction) => {
-         //se ela for maior que zero
-         if (transaction.amount > 0) {
-            //somar a uma variavel e retornar a variavel
-            //income = income + transaction.amount
-            income += transaction.amount;
-         }
-      });
+    return income;
+  },
+  //pegar gastos
+  expenses() {
+    let expense = 0;
 
-      return income;
-   },
-   expenses() {
-      let expense = 0;
-      //pegar todas as transacoes
-      //para cada transacao
-      Transaction.all.forEach((transaction) => {
-         //se ela for menor que zero
-         if (transaction.amount < 0) {
-            //somar a uma variavel e retornar a variavel
-            //expense = expense + transaction.amount
-            expense += transaction.amount;
-         }
-      });
-      return expense;
-   },
-   total() {
-      return Transaction.incomes() + Transaction.expenses();
-   },
+    Transaction.all.forEach((transaction) => {
+      if (transaction.amount < 0) {
+        expense += transaction.amount;
+      }
+    });
+    return expense;
+  },
+  //somando gastos e entradas
+  total() {
+    return Transaction.incomes() + Transaction.expenses();
+  },
 };
 
-//Substituir os dados do HTML com os dados do JS
-//aqui é onde o js vai trabalhar com o html DOM
+/* Form data */
+const Form = {
+  description: document.querySelector("input#description"),
+  amount: document.querySelector("input#amount"),
+  date: document.querySelector("input#date"),
+  id: document.querySelector("input#id"),
 
+  getValues() {
+    return {
+      id: Form.id.value,
+      description: Form.description.value,
+      amount: Form.amount.value,
+      date: Form.date.value,
+    };
+  },
+  setValues(description, amount, date, id) {
+    Form.description.value = description;
+    Form.amount.value = amount;
+    Form.date.value = date;
+    Form.id.value = id;
+  },
+
+  validadeFields() {
+    //desestruturando o objeto
+    const { description, amount, date } = Form.getValues();
+    //se um dos inputs estiver vazio , mostre um erro
+    if (description.trim() === "" || amount.trim() === "" || date.trim() === "") {
+      throw new Error("Por favor, preencha todos os campos");
+    }
+  },
+
+  formatValues() {
+    let { id, description, amount, date } = Form.getValues();
+
+    amount = Utils.formatAmount(amount);
+    date = Utils.formatDateToStringDate(date);
+    description = description.trim();
+
+    if (id) {
+      id = Number(id);
+    } else {
+      id = Number(new Date().getTime());
+    }
+    return {
+      id,
+      description,
+      amount,
+      date,
+    };
+  },
+
+  clearFields() {
+    Form.setValues("", "", new Date().toISOString().substr(0, 10), "");
+
+    /* Form.description.value = "";
+      Form.amount.value = "";
+      Form.date.value = ""; */
+  },
+
+  submit(event) {
+    event.preventDefault();
+    try {
+      Form.validadeFields();
+      const transaction = Form.formatValues();
+      Transaction.add(transaction);
+      Form.clearFields();
+      Modal.close();
+    } catch (error) {
+      alert(error.message);
+    }
+  },
+  cancel() {
+    Form.clearFields();
+    Modal.close();
+  },
+};
+
+/*  Show transactions in javascript */
 const DOM = {
-   //adicionando os dados pelo js no HTML no tbody
-   transactionsContainer: document.querySelector("#data-table tbody"),
-   addTransaction(transaction, index) {
-      const tr = document.createElement("tr");
-      tr.innerHTML = DOM.innerHTMLTransaction(transaction, index);
-      tr.dataset.index = index;
+  transactionsContainer: document.querySelector("#data-table tbody"),
 
-      //adicionando os dados pelo js no HTML no tbody
-      DOM.transactionsContainer.appendChild(tr);
-   },
-   innerHTMLTransaction(transaction, index) {
-      //verificando se a transaction é maior que 0, se for maior é entrada, se não é despesas.
-      const CSSclass = transaction.amount > 0 ? "income" : "expense";
-      //
-      const amount = Utils.formatCurrency(transaction.amount);
-      const html = `
+  addTransaction(transaction, index) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = DOM.innerHTMLTransaction(transaction, index);
+    tr.dataset.index = index;
+
+    DOM.transactionsContainer.appendChild(tr);
+  },
+
+  innerHTMLTransaction(transaction, index) {
+    const amount = Utils.formatCurrency(transaction.amount);
+
+    const html = `
         <td class="description">${transaction.description}</td>
-        <td class="${CSSclass}">${amount}</td>
+        <td class="${transaction.amount > 0 ? "income" : "expense"}">${amount}</td>
         <td class="date">${transaction.date}</td>
         <td>
-          <img onclick="Transaction.remove(${index})" src="../assets/minus.svg" alt="Remover transação" />
+            <ion-icon name="create-outline" onClick="Modal.open(${transaction.id})" class="edit-icon" ></ion-icon>
         </td>
+        <td>
+           <img class="remove-icon" onclick="Transaction.remove(${
+             transaction.id
+           })" src="../assets/minus.svg" title="Remover transação" />
+        </td>
+        
     
     `;
-      //return html - com isso podemos usar a variavel html fora desse escopo
-      return html;
-   },
 
-   //pegando entradas e saidas da aplicação para ir mudando na tela
-   updateBalance() {
-      document.getElementById("incomeDisplay").innerHTML = Utils.formatCurrency(Transaction.incomes());
+    return html;
+  },
 
-      document.getElementById("expenseDisplay").innerHTML = Utils.formatCurrency(Transaction.expenses());
+  updateBalance() {
+    document.getElementById("incomeDisplay").innerHTML = Utils.formatCurrency(Transaction.incomes());
 
-      document.getElementById("totalDisplay").innerHTML = Utils.formatCurrency(Transaction.total());
-   },
+    document.getElementById("expenseDisplay").innerHTML = Utils.formatCurrency(Transaction.expenses());
 
-   clearTransactions() {
-      DOM.transactionsContainer.innerHTML = "";
-   },
+    document.getElementById("totalDisplay").innerHTML = Utils.formatCurrency(Transaction.total());
+  },
+
+  clearTransactions() {
+    DOM.transactionsContainer.innerHTML = "";
+  },
 };
 
-//numeros formatados como moeda Brasileira
+/* Utils */
 const Utils = {
-   formatAmount(value) {
-      /* value = Number(value.replace(/\,\./g, "")) * 100 */
-      value = value * 100;
+  formatCurrency(value) {
+    const signal = Number(value) < 0 ? "-" : "";
 
-      return Math.round(value);
-   },
-   formatDate(date) {
-      const splittedDate = date.split("-");
-      return `${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}`;
-   },
-   formatCurrency(value) {
-      const signal = Number(value) < 0 ? "-" : "";
+    value = String(value).replace(/\D/g, "");
 
-      value = String(value).replace(/\D/g, "");
+    value = Number(value) / 100;
 
-      value = Number(value) / 100;
+    value = value.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
 
-      value = value.toLocaleString("pt-BR", {
-         style: "currency",
-         currency: "BRL",
-      });
+    return `${signal} ${value}`;
+  },
+  formatAmount(value) {
+    /* value = Number(value.replace(/\,\./g, "")) * 100 */
+    value = value * 100;
 
-      return signal + value;
-   },
-};
-
-//button submit do modal
-const Form = {
-   //conectando os inputs do html no js, para fazer a validação do form
-   description: document.querySelector("input#description"),
-   amount: document.querySelector("input#amount"),
-   date: document.querySelector("input#date"),
-
-   //pegando valores dos inputs para guardar eles, acima está pegando a tag(elemento) inteiro
-   getValues() {
-      return {
-         description: Form.description.value,
-         amount: Form.amount.value,
-         date: Form.date.value,
-      };
-   },
-
-   validadeFields() {
-      //desestruturando o objeto
-      const { description, amount, date } = Form.getValues();
-      //se um dos inputs estiver vazio , mostre um erro
-      if (description.trim() === "" || amount.trim() === "" || date.trim() === "") {
-         throw new Error("Por favor, preencha todos os campos");
-      }
-   },
-
-   formatValues() {
-      let { description, amount, date } = Form.getValues();
-
-      amount = Utils.formatAmount(amount);
-
-      date = Utils.formatDate(date);
-
-      return {
-         description,
-         amount,
-         date,
-      };
-   },
-
-   saveTransaction(transaction) {},
-   clearFields() {
-      Form.description.value = "";
-      Form.amount.value = "";
-      Form.date.value = "";
-   },
-
-   submit(event) {
-      //não enviar o formulario na url da pagina com preventDefault
-      event.preventDefault();
-
-      //qualquer erro que for disparado pelo throw o try catch vai mostrar o erro
-      try {
-         //verificar se os campos são validos
-         Form.validadeFields();
-         //formatar os dados para salvar
-         const transaction = Form.formatValues();
-         //salvar - adicionar transactions
-         Transaction.add(transaction);
-         //apagar os dados do formulario
-         Form.clearFields();
-         //modal feche
-         Modal.close();
-         //Atualizar a aplicação - não precisamos por aqui o app reload() porque já tem na const Transaction
-         //App.reload()
-      } catch (error) {
-         //aqui vai aparecer uma caixa de alerta no navegador pedindo para preencher os campos do formulario
-         alert(error.message);
-      }
-
-      //verificar se todas informações foram preenchidas
-   },
+    return Math.round(value);
+  },
+  formatDateToStringDate(date) {
+    const splittedDate = date.split("-");
+    return splittedDate[2] + "/" + splittedDate[1] + "/" + splittedDate[0];
+  },
+  formatStringDateToDate(stringDate) {
+    const splittedDate = stringDate.split("/");
+    return `${splittedDate[2]}-${splittedDate[1]}-${splittedDate[0]}`;
+  },
 };
 
 const App = {
-   //copulou - 2 / copulou a DOM novamente 5
-   init() {
-      //para cada elemento execute uma funcionalidade - está adicionando cada  transaçãos de forma automatica no HTMLs
-      Transaction.all.forEach(DOM.addTransaction);
-      DOM.updateBalance();
-      Storage.set(Transaction.all);
-   },
-   //reiniciou - 4
-   reload() {
-      DOM.clearTransactions();
-      App.init();
-   },
+  init() {
+    Transaction.all.forEach(DOM.addTransaction);
+    DOM.updateBalance();
+    Form.clearFields();
+    StorageTransactions.set(Transaction.all);
+  },
+  reload() {
+    DOM.clearTransactions();
+    App.init();
+  },
 };
 
-// iniciando a aplicação - 1
+/* Init Application */
 App.init();
 
-// array de objetos da tabela de transactions
-//array do Transaction substituido pelo Storage para os dados ficarem salvos
-/* all:[
-	{
-		description: "Luz",
-		amount: -50010,
-		date: "23/01/2021",
-	},
-	{
-		description: "Website",
-		amount: 500000,
-		date: "23/01/2021",
-	},
-	{
-		description: "Internet",
-		amount: -20012,
-		date: "23/01/2021",
-	},
-	{
-		description: "App",
-		amount: 200000,
-		date: "23/01/2021",
-	},
-], */
-
-//Change Theme
+/* Change Theme */
 
 const html = document.querySelector("html");
 const checkbox = document.querySelector("input[name=theme]");
@@ -277,29 +269,73 @@ const checkbox = document.querySelector("input[name=theme]");
 const getStyle = (element, style) => window.getComputedStyle(element).getPropertyValue(style);
 
 const initialColors = {
-   bg: getStyle(html, "--bg"),
-   bgPanel: getStyle(html, "--bg-panel"),
-   colorHeadings: getStyle(html, "--color-headings"),
-   colorText: getStyle(html, "--color-text"),
+  bg: getStyle(html, "--bg"),
+  bgPanel: getStyle(html, "--bg-panel"),
+  colorHeadings: getStyle(html, "--color-headings"),
+  colorNavbar: getStyle(html, "--color-navbar"),
+  colorText: getStyle(html, "--color-text"),
 };
 
 const darkMode = {
-   bg: "#333333",
-   bgPanel: "#000000",
-   colorHeadings: "#363d41",
-   colorText: "#FCFCFC",
+  bg: "#1c1b1b",
+  bgPanel: "#000000",
+  colorHeadings: "#000000",
+  colorNavbar: "#4723D9",
+  colorText: "#FCFCFC",
 };
 
 const transformKey = (key) => "--" + key.replace(/([A-Z])/, "-$1").toLowerCase();
 
 const changeColors = (colors) => {
-   Object.keys(colors).map((key) => {
-      html.style.setProperty(transformKey(key), colors[key]);
-   });
+  Object.keys(colors).map((key) => {
+    html.style.setProperty(transformKey(key), colors[key]);
+  });
 };
 
 checkbox.addEventListener("change", ({ target }) => {
-   target.checked ? changeColors(darkMode) : changeColors(initialColors);
+  target.checked ? changeColors(darkMode) : changeColors(initialColors);
 });
 
-//Salvando no localStorage o template
+/* Show NavBar */
+
+const showMenu = (toggleId, navbarId, bodyId) => {
+  const toggle = document.getElementById(toggleId),
+    navbar = document.getElementById(navbarId),
+    bodypadding = document.getElementById(bodyId);
+
+  if (toggle && navbar) {
+    toggle.addEventListener("click", () => {
+      navbar.classList.toggle("expander");
+
+      bodypadding.classList.toggle("body-pd");
+    });
+  }
+};
+
+showMenu("nav-toggle", "navbar", "body-pd");
+
+/* ativa links do navbar com clique */
+
+const linkColor = document.querySelectorAll(".nav__link");
+function colorLink() {
+  linkColor.forEach((l) => l.classList.remove("active"));
+  this.classList.add("active");
+}
+
+linkColor.forEach((l) => l.addEventListener("click", colorLink));
+
+/* collapse menu */
+
+const linkCollapse = document.getElementsByClassName("collapse__link");
+console.log(linkCollapse);
+var i;
+
+for (i = 0; i < linkCollapse.length; i++) {
+  linkCollapse[i].addEventListener("click", function () {
+    const collapseMenu = this.nextElementSibling;
+    collapseMenu.classList.toggle("showCollapse");
+
+    const rotate = collapseMenu.previousElementSibling;
+    rotate.classList.toggle("rotate");
+  });
+}

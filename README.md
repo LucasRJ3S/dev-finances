@@ -1,25 +1,23 @@
-<h1 align="center">
-  <img alt="dev.finances" title="dev.finances" src=".github/logo.svg" width="220px" />
-</h1>
+# Discover-Maratona
 
-<p align="center">
-  <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-layout">Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#memo-licença">Licença</a>
-</p>
+Nesse evento da rockseat foi nos apresentado conceitos básicos de HTML,CSS e Javascript.
 
-<p align="center">
- <img src="https://img.shields.io/static/v1?label=PRs&message=welcome&color=49AA26&labelColor=000000" alt="PRs welcome!" />
+## **💻 Sobre o projeto**
 
-  <img alt="License" src="https://img.shields.io/static/v1?label=license&message=MIT&color=49AA26&labelColor=000000">
-</p>
+dev.finance$ - É a maneira de você controlar suas finanças.
 
-<br>
+Projeto desenvolvido durante a **Maratona Discover** oferecida pela [Rocketseat](https://www.linkedin.com/school/rocketseat/).
 
-<p align="center">
-  <img alt="dev.finances" src=".github/devfinances.png" width="100%">
-</p>
+## **⚙️ Funcionalidades**
+
+- [x] Site disponível, onde os usuários podem:
+  - [x] Criar transações de entrada
+  - [x] Criar transações de saída
+  - [x] Adicionar descrições para as transações
+  - [x] Adicionar a data da transação
+  - [x] Editar transações, data e descrições
+  - [x] Dark Mode
+  - [x] Sidebar
 
 ## 🚀 Tecnologias
 
@@ -33,14 +31,18 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 O dev.finances é uma aplicação de controle financeiro, onde é possível cadastrar e excluir transações e ver o saldo de entrada e saída 💰
 
-## 🔖 Layout
+## **👨‍💻 Contribuidores**
 
-Você pode visualizar o layout do projeto através [desse link](https://www.figma.com/file/7Vu9DzUaCZIV4nibzkjgB4/dev.finance%24-Maratona-Discover). É necessário ter conta no [Figma](https://figma.com) para acessá-lo.
+**[Mayk Brito](https://rocketseat.com.br/)**
 
-## :memo: Licença
+[https://avatars2.githubusercontent.com/u/6643122?s=460&u=1e9e1f04b76fb5374e6a041f5e41dce83f3b5d92&v=4](https://avatars2.githubusercontent.com/u/6643122?s=460&u=1e9e1f04b76fb5374e6a041f5e41dce83f3b5d92&v=4)
 
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
+[🚀](https://rocketseat.com.br/)
+
+## **🦸 Autor**
+
+[Lucas Rodrigues](https://www.linkedin.com/in/lucas-rodrigues-878330189/)[🚀]
 
 ---
 
-Feito com ♥ by Lucas Rodrigues - Créditos Rocketseat :wave: 
+Feito com muito ❤️ por [LucasRJ3S](https://github.com/LucasRJ3S/) 👋🏽 [Entre em contato!]

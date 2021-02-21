@@ -1,43 +1,69 @@
 /* Universal Selector - Global ---------------------------------------*/
 
 :root {
-  --dark-blue: #000000;
+  --dark-blue: #1c1b1b;
   --color-white: white;
   --green: #54ba30;
   --light-green: #3dd705;
   --red: #e92929;
-
   /* inital colors to dark theme */
   --bg: #FCFCFC;
-  --bg-panel: #d3d3d3;
-  --color-headings: #566d4d;
+  --bg-panel: #ffffff;
+  --color-headings: #4723D9;
+  --color-navbar: #12192C;
   --color-text: #000000;
+  color: #000000;
+  /* height and width */
+  --header-height: 3rem;
+  --nav-width: 92px;
+  /* colors sidebar */
+  --first-color: #4723D9;
+  --bg-color: #12192C;
+  --sub-color: #B6CEFC;
+  --white-color: #FFF;
+  /* typography */
+  --normal-font-size: 1rem;
+  --small-font-size: .875rem;
+  /* Z INDEX */
+  --z-fixed: 100;
 }
 
-* {
+*, ::before, ::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 html {
-  font-size: 93.75%; /* 15px , 93,75% de 16px */
+  font-size: 93.75%;
+  /* 15px , 93,75% de 16px */
 }
 
 body {
   background-color: var(--bg);
   color: var(--color-text);
   font-family: "Poppins", sans-serif;
-  transition: 0.6s;
-
+  position: relative;
+  margin: 0;
+  transition: .5s;
 }
+
+h1 {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 /* Header ---------------------------------------*/
 
 header {
   background-color: var(--color-headings);
   padding: 2rem 0 10rem;
   text-align: center;
-  
   justify-content: center;
 }
 
@@ -45,25 +71,26 @@ header h1 {
   color: var(--color-white);
   font-weight: 100;
 }
+
 /* Switch theme ---------------------------------------*/
 
-.containerSwitchTheme{ 
+.containerSwitchTheme {
   position: relative;
-  
 }
-.toggle{
+
+.toggle {
   position: absolute;
   bottom: 2px;
   right: 16px;
 }
 
-input[type=checkbox]{
+input[type=checkbox] {
   height: 0;
   width: 0;
   visibility: hidden;
 }
 
-.labelSwitch{
+.labelSwitch {
   cursor: pointer;
   text-indent: -9999px;
   width: 52px;
@@ -74,7 +101,7 @@ input[type=checkbox]{
   position: relative;
 }
 
-.labelSwitch::after{
+.labelSwitch::after {
   content: "";
   position: absolute;
   top: 3px;
@@ -83,20 +110,20 @@ input[type=checkbox]{
   height: 20px;
   background-color: black;
   border-radius: 50px;
-  transition: 0.6s;
+  transition: 0.4s;
 }
 
-input:checked + .labelSwitch{
-  background-color: black;
+input:checked+.labelSwitch {
+  background-color: var(--bg);
 }
 
-input:checked + .labelSwitch::after{
+input:checked+.labelSwitch::after {
   background-color: white;
   left: calc(100% - 5px);
   transform: translateX(-100%);
 }
 
-.labelSwitch:active:after{
+.labelSwitch:active:after {
   width: 45px;
 }
 
@@ -131,28 +158,20 @@ h2 {
 /*Links & Buttons ---------------------------------------*/
 
 a {
-  
   color: var(--color-text);
   text-decoration: none;
 }
 
-a:hover {
-  
-}
+a:hover {}
 
 button {
   width: 100%;
   height: 50px;
-
   border: none;
-
   color: white;
   background: var(--green);
-
   padding: 0;
-
   border-radius: 0.25rem;
-
   cursor: pointer;
 }
 
@@ -161,6 +180,7 @@ button:hover {
 }
 
 /*aqui queremos que a caixa tenha button e new para alterar os dois*/
+
 .button.new {
   display: inline-block;
   margin-bottom: 0.8rem;
@@ -170,13 +190,10 @@ button:hover {
   color: var(--red);
   border: 2px var(--red) solid;
   border-radius: 0.25rem;
-
   height: 50px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   opacity: 0.6;
 }
 
@@ -217,7 +234,6 @@ button:hover {
 }
 
 .card h3:hover {
-  
   opacity: 0.7;
 }
 
@@ -237,53 +253,54 @@ button:hover {
 #transaction {
   display: block;
   width: 100%;
-  overflow-x: auto; /*para não transbordar a tela no mobile*/
+  overflow-x: auto;
+  /*para não transbordar a tela no mobile*/
 }
 
 #data-table {
   width: 100%;
   border-spacing: 0 0.5rem;
   color: black;
- 
 }
 
-table thead tr th:first-child,
-table tbody tr td:first-child {
-  
+table thead tr th:first-child, table tbody tr td:first-child {
   border-radius: 0.30rem 0 0 0.30rem;
 }
 
-table thead tr th:last-child,
-table tbody tr td:last-child {
+table thead tr th:last-child, table tbody tr td:last-child {
   border-radius: 0 0.30rem 0.30rem 0;
-  
 }
 
 table thead th {
-  
-  background: var(--green);
+  background: var(--bg-panel);
   border-bottom: 0.5px solid var(--color-text);
   border-top: 0.5px solid var(--color-text);
   border-bottom: 0.5px solid var(--color-text);
   color: var(--color-text);
   font-weight: 400;
   padding: 1rem 2rem;
-  text-align: left;
+  text-align: center;
 }
+
+table thead th:nth-child(4) {}
+
 table thead th:last-child {
   border-right: 0.5px solid var(--color-text);
 }
+
 table tbody td:last-child {
   border-right: 0.5px solid var(--color-text);
 }
+
 table thead th:first-child {
   border-left: 0.5px solid var(--color-text);
 }
+
 table tbody td:first-child {
   border-left: 0.5px solid var(--color-text);
 }
 
-table tbody tr{
+table tbody tr {
   background: var(--bg-panel);
 }
 
@@ -292,24 +309,21 @@ table tbody tr {
 }
 
 table tbody tr:hover {
-  
-  opacity: 0.7;
+  opacity: 1;
 }
 
 table tbody td {
   background: var(--bg-panel);
   color: var(--color-text);
   padding: 1rem 2rem;
-
   border-bottom: 0.5px solid var(--color-text);
   border-top: 0.5px solid var(--color-text);
   border-bottom: 0.5px solid var(--color-text);
-
- 
+  text-align: center;
 }
 
 td.description {
-  color:  var(--color-text);
+  color: var(--color-text);
 }
 
 td.income {
@@ -319,20 +333,29 @@ td.income {
 td.expense {
   color: red;
 }
+
+.edit-icon {
+  font-size: 2rem;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+
+.remove-icon {
+  cursor: pointer;
+}
+
 /* Modal ---------------------------------------*/
+
 .modal-overlay {
   width: 100%;
   height: 100%;
-
   background-color: rgba(0, 0, 0, 0.7);
-
   position: fixed;
   top: 0;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   opacity: 0.5;
   visibility: hidden;
   z-index: 999;
@@ -341,17 +364,39 @@ td.expense {
 .modal-overlay.active {
   opacity: 1;
   visibility: visible;
+  position: fixed;
+}
+
+.modal-overlay-edit {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+  visibility: hidden;
+  z-index: 999;
+}
+
+.modal-overlay-edit.actives {
+  opacity: 1;
+  visibility: visible;
+  position: fixed;
 }
 
 .modal {
   background: var(--bg);
   color: var(--color-text);
   padding: 2.4rem;
-
   position: relative;
   z-index: 1;
 }
+
 /* Form - Modal ---------------------------------------*/
+
 #form {
   max-width: 500px;
 }
@@ -363,10 +408,9 @@ td.expense {
 input {
   border: none;
   border-radius: 0.2rem;
-
   padding: 0.8rem;
-
   width: 100%;
+  background-color: #d3d3d3;
 }
 
 .input-group {
@@ -383,8 +427,7 @@ input {
   align-items: center;
 }
 
-.input-group.actions .button,
-.input-group.actions button {
+.input-group.actions .button, .input-group.actions button {
   width: 48%;
 }
 
@@ -397,17 +440,226 @@ footer {
   opacity: 0.8;
 }
 
-/* Reponsive ---------------------------------------*/
-/*a partir de 800px pra cima faça essa alteração abaixo*/
-@media (min-width: 800px) {
-  html {
-    font-size: 87.5%; /* 14px de 16px qnt de px de fonte tem aqui? */
-  }
+/* body or .header */
 
+/* .body {
+  width: 100%;
+  height: var(--header-height);
+  position: fixed;
+  top: 0;
+  left: 0;
+  justify-content: space-between;
+  padding: 0 1rem;
+  z-index: var(--z-fixed);
+} */
+
+/* Sidebar ---------------------------------------*/
+
+.l-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--nav-width);
+  height: 100vh;
+  background-color: var(--color-headings);
+  color: var(--white-color);
+  border-right: 0.5px solid var(--color-text);
+  padding: 1.5rem 1.5rem 2rem;
+  transition: .5s;
+  z-index: var(--z-fixed);
+}
+
+/* nav */
+
+.nav {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.nav__brand {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.nav__toggle {
+  font-size: 2.2rem;
+  padding: .75rem;
+  cursor: pointer;
+}
+
+.nav__logo {
+  color: var(--white-color);
+  font-weight: 700;
+}
+
+.nav__link {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  align-items: center;
+  column-gap: .75rem;
+  padding: .75rem;
+  color: var(--white-color);
+  border-radius: .5rem;
+  margin-bottom: 1rem;
+  transition: .3s;
+  cursor: pointer;
+}
+
+.nav__link:hover {
+  background-color: var(--color-navbar);
+}
+
+.nav__icon {
+  font-size: 2.2rem;
+}
+
+.nav__name {
+  font-size: var(--small-font-size);
+}
+
+/* expand menu */
+
+.expander {
+  width: calc(var(--nav-width) + 9rem);
+}
+
+/* add espaço body */
+
+.body-pd {
+  padding: 0 0 0 5rem;
+}
+
+/* active links menu */
+
+.active-links {
+  background-color: var(--color-navbar);
+}
+
+/* Collapse */
+
+.collapse {
+  grid-template-columns: 30px max-content 1fr;
+}
+
+.collapse__link {
+  justify-self: flex-end;
+  transition: .5s;
+}
+
+.collapse__menu {
+  display: none;
+  padding: .75rem 2.25rem;
+}
+
+.collapse__sublink {
+  color: var(--sub-color);
+  font-size: var(--small-font-size);
+}
+
+.collapse__sublink:hover {
+  color: var(--white-color);
+}
+
+/* show collapse */
+
+.showCollapse {
+  display: block;
+  transition: .5s;
+}
+
+/* rotacione icon do collapse */
+
+.rotate {
+  transform: rotate(180deg);
+  transition: .8s;
+}
+
+/* Reponsive ---------------------------------------*/
+
+/*a partir de 800px pra cima faça essa alteração abaixo*/
+
+@media screen and (min-width: 800px) {
+  html {
+    font-size: 87.5%;
+    /* 14px de 16px qnt de px de fonte tem aqui? */
+  }
   #balance {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 1fr 1fr 1fr*/
-    gap: 2rem; /*espaço entre as colunas do grid*/
+    grid-template-columns: repeat(3, 1fr);
+    /* 1fr 1fr 1fr*/
+    gap: 2rem;
+    /*espaço entre as colunas do grid*/
   }
 }
 
+/* button color test  */
+
+.glow-on-hover {
+  width: 220px;
+  height: 50px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+}
+
+.glow-on-hover:before {
+  content: '';
+  background: linear-gradient(45deg, #ff7300, #48ff00, #002bff, #7a00ff);
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+  border-radius: 10px;
+}
+
+.glow-on-hover:active {
+  background: var(--green);
+}
+
+.glow-on-hover:active:after {
+  background: transparent;
+}
+
+.glow-on-hover:hover:before {
+  opacity: 1;
+}
+
+.glow-on-hover:after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--light-green);
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
