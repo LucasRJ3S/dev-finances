@@ -35,14 +35,10 @@ O dev.finances é uma aplicação de controle financeiro, onde é possível cada
 
 **[Mayk Brito](https://rocketseat.com.br/)**
 
-[https://avatars2.githubusercontent.com/u/6643122?s=460&u=1e9e1f04b76fb5374e6a041f5e41dce83f3b5d92&v=4](https://avatars2.githubusercontent.com/u/6643122?s=460&u=1e9e1f04b76fb5374e6a041f5e41dce83f3b5d92&v=4)
-
-[🚀](https://rocketseat.com.br/)
-
 ## **🦸 Autor**
 
-[Lucas Rodrigues](https://www.linkedin.com/in/lucas-rodrigues-878330189/)[🚀]
+[Lucas Rodrigues](https://www.linkedin.com/in/lucas-rodrigues-878330189/) 🚀
 
 ---
 
-Feito com muito ❤️ por [LucasRJ3S](https://github.com/LucasRJ3S/) 👋🏽 [Entre em contato!]
+Feito com muito ❤️ por [LucasRJ3S](https://github.com/LucasRJ3S/) 👋🏽
