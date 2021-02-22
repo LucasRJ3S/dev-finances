@@ -1,3 +1,18 @@
+<h1 align="center">
+    <img alt="Dev.finance$" src="./assets/logo.svg" />
+    <br>
+    Dev.finance$
+</h1>
+<p align="center">
+  <a href="#rocket-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+</p>
+
+![App Screenshot](https://i.imgur.com/8aH89TG.png)
+![App Screenshot](https://i.imgur.com/bAp1KEH.png)
+![App Screenshot](https://i.imgur.com/8WKuAz7.png)
+![App Screenshot](https://i.imgur.com/zQ138YZ.png)
+![App Screenshot](https://i.imgur.com/lnIHrei.png)
+
 # Discover-Maratona
 
 Nesse evento da rockseat foi nos apresentado conceitos básicos de HTML,CSS e Javascript.
@@ -21,7 +36,7 @@ Link do site da aplicação: [Dev.Finance$](https://lucasrj3s.github.io/dev-fina
   - [x] Dark Mode
   - [x] Sidebar
 
-## 🚀 Tecnologias
+## 🚀 :rocket: Technologies
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
 
