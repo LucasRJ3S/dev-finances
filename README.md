@@ -1,11 +1,7 @@
 <h1 align="center">
     <img alt="Dev.finance$" src="./assets/logo.svg" />
     <br>
-    Dev.finance$
 </h1>
-<p align="center">
-  <a href="#rocket-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-</p>
 
 ![App Screenshot](https://i.imgur.com/8aH89TG.png)
 ![App Screenshot](https://i.imgur.com/bAp1KEH.png)
