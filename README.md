@@ -8,6 +8,8 @@ dev.finance$ - É a maneira de você controlar suas finanças.
 
 Projeto desenvolvido durante a **Maratona Discover** oferecida pela [Rocketseat](https://www.linkedin.com/school/rocketseat/).
 
+Link do site da aplicação: [Dev.Finance$](https://lucasrj3s.github.io/dev-finances/)
+
 ## **⚙️ Funcionalidades**
 
 - [x] Site disponível, onde os usuários podem:
