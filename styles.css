@@ -487,6 +487,13 @@ footer {
   margin-bottom: 2rem;
 }
 
+.nav__brand img {
+  width: 100px;
+  height: 100px;
+  margin-top: 8px;
+  cursor: none;
+}
+
 .nav__toggle {
   font-size: 2.2rem;
   padding: .75rem;
