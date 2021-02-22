@@ -114,7 +114,7 @@ input[type=checkbox] {
 }
 
 input:checked+.labelSwitch {
-  background-color: var(--bg);
+  background-color: var(--first-color);
 }
 
 input:checked+.labelSwitch::after {
