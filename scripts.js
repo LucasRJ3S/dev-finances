@@ -191,7 +191,7 @@ const DOM = {
         <td>
            <img class="remove-icon" onclick="Transaction.remove(${
              transaction.id
-           })" src="../assets/minus.svg" title="Remover transação" />
+           })" src="./assets/minus.svg" title="Remover transação" />
         </td>
         
     

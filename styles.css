@@ -114,7 +114,7 @@ input[type=checkbox] {
 }
 
 input:checked+.labelSwitch {
-  background-color: var(--bg);
+  background-color: var(--first-color);
 }
 
 input:checked+.labelSwitch::after {
@@ -485,6 +485,12 @@ footer {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
+}
+
+.nav__brand a img {
+  height: 50px;
+  width: 100px;
+  margin-top: 5px;
 }
 
 .nav__toggle {
