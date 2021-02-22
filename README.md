@@ -2,9 +2,6 @@
     <img alt="Dev.finance$" src="./assets/logo.svg" />
     <br>
 </h1>
-<p align="center">
-  <a href="#rocket-technologies">Technologies</a>
-</p>
 
 ![App Screenshot](https://i.imgur.com/8aH89TG.png)
 ![App Screenshot](https://i.imgur.com/bAp1KEH.png)
